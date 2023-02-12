@@ -5,14 +5,24 @@ deploy:
     manifests:
       - ./infra/k8s/*
 build:
-  local:
-    push: false
+  # local:
+  #   push: false
+  googleCloudBuild:
+    projectId: dynamic-hub-376718
   artifacts:
-    - image: superiqbal7/ticketing-auth
+    - image: us.gcr.io/dynamic-hub-376718/auth
       context: auth
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
           - src: "src/**/*.ts"
+            dest: .
+    - image: us.gcr.io/dynamic-hub-376718/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "**/*.js"
             dest: .
