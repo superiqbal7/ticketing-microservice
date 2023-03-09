@@ -2,10 +2,8 @@ import express, { Request, Response } from "express";
 import { body, validationResult } from "express-validator";
 import jwt from 'jsonwebtoken';
 
-import { validateRequest } from '../middlewares/validate-request';
+import { validateRequest, asyncHandler, BadRequestError } from '@ticketingiqbal7/common';
 import { User } from '../models/user';
-import { asyncHandler } from "../middlewares/async-handler";
-import { BadRequestError } from '../errors/bad-request-error';
 
 const router = express.Router();
 
